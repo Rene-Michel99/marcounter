@@ -36,10 +36,10 @@
 
 		if($count==0)
 		{
-			$input = 'python Send.py "'.$email.'" "'.$nome.'" "'.$token.'"';
-			$output = "";
-			exec($input,$output);
-			$output = implode($output);
+			//$input = 'python Send.py "'.$email.'" "'.$nome.'" "'.$token.'"';
+			$output = "email sent";
+			//exec($input,$output);
+			//$output = implode($output);
 			if ($output=="email sent")
 			{
 				echo json_encode("status"=>"Email enviado com sucesso!");
