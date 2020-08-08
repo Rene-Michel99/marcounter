@@ -6,20 +6,18 @@
 
 	session_start();
 
-	$json = $_POST['json'];
-
-	$nome = $json['nome'];
-	$matricula = $json['matricula'];
-	$email = $json['email'];
-	$curso = $json['curso'];
-	$ano = $json['ano'];
-	$senha = $json['senha'];
+	$nome = $_POST['nome'];
+	$matricula = $_POST['matricula'];
+	$email = $_POST['email'];
+	$curso = $_POST['curso'];
+	$ano = $_POST['ano'];
+	$senha = $_POST['senha'];
 	$token = uniqid();
 
 	if($nome && $matricula && $email && $curso && $ano && $senha)
 	{
-		//$manager = new MongoDB\Driver\Manager("mongodb+srv://marcounter:s9y7ht5T7s1m7ihY@pds.twdrk.mongodb.net/pds?retryWrites=true&w=majority");
-		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
+		$manager = new MongoDB\Driver\Manager("mongodb+srv://marcounter:s9y7ht5T7s1m7ihY@pds.twdrk.mongodb.net/pds?retryWrites=true&w=majority");
+		//$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 
 		//checa se o email já existe
 		$query = new MongoDB\Driver\Query(['email'=>$email]);
