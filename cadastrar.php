@@ -1,10 +1,10 @@
 
 <?php
-	header("Access-Control-Allow-Origin:*");
-	header("Access-Control-Allow-Headers:*");
-	header("Content-type: application/json");
+	//header("Access-Control-Allow-Origin:*");
+	//header("Access-Control-Allow-Headers:*");
+	//header("Content-type: application/json");
 
-	session_start();
+	//session_start();
 
 	$nome = $_POST['nome'];
 	$matricula = $_POST['matricula'];
@@ -40,8 +40,6 @@
 			//$output = implode($output);
 			if ($output=="email sent")
 			{
-				echo json_encode("status"=>"Email enviado com sucesso!");
-
 				$bulk = new MongoDB\Driver\BulkWrite;
 				$account = array(
 					'_id'=>uniqid(),
@@ -58,7 +56,7 @@
 				$bulk->insert($account);
 
 				$res = $manager->executeBulkWrite("pds.usuario",$bulk);
-				$_SESSION['acc'] = $account;
+				//$_SESSION['acc'] = $account;
 			}
 		}
 		else
