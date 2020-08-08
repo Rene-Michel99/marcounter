@@ -1,17 +1,17 @@
 
 <?php
-	//header("Access-Control-Allow-Origin:*");
-	//header("Access-Control-Allow-Headers:*");
-	//header("Content-type: application/json");
+	header("Access-Control-Allow-Origin:*");
+	header("Access-Control-Allow-Headers:*");
+	header("Content-type: application/json");
 
-	//session_start();
+	$json = json_decode($_POST['json']);
 
-	$nome = $_POST['nome'];
-	$matricula = $_POST['matricula'];
-	$email = $_POST['email'];
-	$curso = $_POST['curso'];
-	$ano = $_POST['ano'];
-	$senha = $_POST['senha'];
+	$nome = $json['nome'];
+	$matricula = $json['matricula'];
+	$email = $json['email'];
+	$curso = $json['curso'];
+	$ano = $json['ano'];
+	$senha = $json['senha'];
 	$token = uniqid();
 
 	if($nome && $matricula && $email && $curso && $ano && $senha)
@@ -56,12 +56,12 @@
 				$bulk->insert($account);
 
 				$res = $manager->executeBulkWrite("pds.usuario",$bulk);
-				//$_SESSION['acc'] = $account;
+				echo json_encode(array("status"=>"success"));
 			}
 		}
 		else
-			echo "Email ou matricula ja cadastrado!";
+			echo json_encode(array("status"=>"duplicate_account"));
 	}
 	else
-		echo "Campos não preenchidos";	
+		echo json_encode(array("status"=>"none_data"));	
 ?>
