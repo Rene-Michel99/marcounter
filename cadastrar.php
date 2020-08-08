@@ -16,8 +16,8 @@
 
 	if($nome && $matricula && $email && $curso && $ano && $senha)
 	{
-		$manager = new MongoDB\Driver\Manager("mongodb+srv://marcounter:s9y7ht5T7s1m7ihY@pds.twdrk.mongodb.net/pds?retryWrites=true&w=majority");
-		//$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
+		//$manager = new MongoDB\Driver\Manager("mongodb+srv://marcounter:s9y7ht5T7s1m7ihY@pds.twdrk.mongodb.net/pds?retryWrites=true&w=majority");
+		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 
 		//checa se o email já existe
 		$query = new MongoDB\Driver\Query(['email'=>$email]);
