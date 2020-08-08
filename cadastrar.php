@@ -4,7 +4,12 @@
 	header("Access-Control-Allow-Headers:*");
 	header("Content-type: application/json");
 
-	$json = json_decode($_POST['json']);
+	$json = null;
+
+	foreach ($_POST as $post)
+		$json = $post;
+
+	$json = json_decode($json, true);
 
 	$nome = $json['nome'];
 	$matricula = $json['matricula'];
