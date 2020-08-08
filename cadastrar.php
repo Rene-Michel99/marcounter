@@ -42,7 +42,7 @@
 			//$output = implode($output);
 			if ($output=="email sent")
 			{
-				echo json_encode("status"=>"Email enviado com sucesso!");
+				//echo json_encode("status"=>"Email enviado com sucesso!");
 
 				$bulk = new MongoDB\Driver\BulkWrite;
 				$account = array(
