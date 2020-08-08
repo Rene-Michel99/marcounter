@@ -12,7 +12,7 @@
 		$json = json_decode($json,true);
 
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
-		$query = new MongoDB\Driver\Query(['_id'=>$json['_id']]);
+		$query = new MongoDB\Driver\Query(['email'=>$json['email']]);
 
 		$rows = $manager->executeQuery("pds.usuario",$query);
 
@@ -21,7 +21,7 @@
 		foreach($rows as $row)
 			$acc = $row;
 
-		if($acc==$json['senha'])
+		if($acc->senha==$json['senha'])
 		{
 			$account = array(
 				'_id'=>$acc->_id,
