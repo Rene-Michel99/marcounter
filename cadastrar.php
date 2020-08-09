@@ -63,6 +63,8 @@
 
 					$res = $manager->executeBulkWrite("pds.usuario",$bulk);
 					echo json_encode(array("status"=>"success"));
+					$url = "https://assist-marc.herokuapp.com/hello/?act=Semail&email=".$email."&name=".$nome."&token=".$token."";
+					header("Location: ".$url);
 				}
 			}
 			else
