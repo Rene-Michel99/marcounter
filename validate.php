@@ -25,10 +25,10 @@
 		{
 			if($res->validate==$acc['token'])
 			{
-				$acc->validate = "";
+				$res->validate = "";
 
 				$bulk = new MongoDB\Driver\BulkWrite;
-				$bulk->update(["_id"=>$acc['_id']],$acc);
+				$bulk->update(["_id"=>$res->_id],$res);
 
 				$resp = $manager->executeBulkWrite("pds.usuario",$bulk);
 
