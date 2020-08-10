@@ -24,9 +24,9 @@
 		if($res!=null)
 		{
 			if($res['validate']==$acc['token'])
-				echo json_encode('status'=>'pass');
+				echo json_encode(array('status'=>'pass'));
 			else
-				echo json_encode('status'=>'incorrect');
+				echo json_encode(array('status'=>'incorrect'));
 		}
 	}
 	
