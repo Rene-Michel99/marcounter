@@ -23,7 +23,7 @@
 
 		if($res!=null)
 		{
-			if($res['validate']==$acc['token'])
+			if($res->validate==$acc['token'])
 			{
 				$account = array(
 						'_id'=>$res->_id,
@@ -39,7 +39,7 @@
 						'validate'=>"");
 
 				$bulk = new MongoDB\Driver\BulkWrite;
-				$bulk->update(['_id'=>$res->_id],$account);
+				$bulk->update(["_id"=>$acc['_id']],$acc);
 
 				$resp = $manager->executeBulkWrite("pds.usuario",$bulk);
 
@@ -48,8 +48,10 @@
 			else
 				echo json_encode(array("status"=>"incorrect"));
 		}
-		echo json_encode(array("status"=>"null"));
+		else
+			echo json_encode(array("status"=>"null"));
 	}
-	echo json_encode(array("status"=>"None data"));
+	else
+		echo json_encode(array("status"=>"None data"));
 	
 ?>
