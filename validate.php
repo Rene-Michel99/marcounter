@@ -25,17 +25,31 @@
 		{
 			if($res['validate']==$acc['token'])
 			{
-				$res->validate = "";
+				$account = array(
+						'_id'=>$res->_id,
+						'nome'=>$res->nome,
+						'cargo'=>"aluno",
+						'matricula'=>$res->matricula,
+						'email'=>$res->email,
+						'curso'=>$res->curso,
+						'ano'=>$res->ano,
+						'senha'=>$res->senha,
+						'horas'=>0,
+						'certificados'=>[],
+						'validate'=>"");
+
 				$bulk = new MongoDB\Driver\BulkWrite;
-				$bulk->update(['_id'=>$res->_id],$res);
+				$bulk->update(['_id'=>$res->_id],$account);
 
 				$resp = $manager->executeBulkWrite("pds.usuario",$bulk);
 
-				echo json_encode(array('status'=>'pass'));
+				echo json_encode(array("status"=>"pass"));
 			}
 			else
-				echo json_encode(array('status'=>'incorrect'));
+				echo json_encode(array("status"=>"incorrect"));
 		}
+		echo json_encode(array("status"=>"null"));
 	}
+	echo json_encode(array("status"=>"None data"));
 	
 ?>
