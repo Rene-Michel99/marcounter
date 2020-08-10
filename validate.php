@@ -13,7 +13,7 @@
 		$acc = json_decode($acc, true);
 
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
-		$query = new MongoDB\Driver\Query(['email'=>$email]);
+		$query = new MongoDB\Driver\Query(['email'=>$acc['email']]);
 
 		$rows = $manager->executeQuery("pds.usuario",$query);
 
@@ -30,7 +30,7 @@
 				$bulk->update(['_id'=>$res->_id],$res);
 
 				$resp = $manager->executeBulkWrite("pds.usuario",$bulk);
-				
+
 				echo json_encode(array('status'=>'pass'));
 			}
 			else
