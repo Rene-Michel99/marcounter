@@ -25,18 +25,7 @@
 		{
 			if($res->validate==$acc['token'])
 			{
-				$account = array(
-						'_id'=>$res->_id,
-						'nome'=>$res->nome,
-						'cargo'=>"aluno",
-						'matricula'=>$res->matricula,
-						'email'=>$res->email,
-						'curso'=>$res->curso,
-						'ano'=>$res->ano,
-						'senha'=>$res->senha,
-						'horas'=>0,
-						'certificados'=>[],
-						'validate'=>"");
+				$acc->validate = "";
 
 				$bulk = new MongoDB\Driver\BulkWrite;
 				$bulk->update(["_id"=>$acc['_id']],$acc);
