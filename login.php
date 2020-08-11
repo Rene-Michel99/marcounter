@@ -24,6 +24,7 @@
 		if($acc->senha==$json['senha'])
 		{
 			$account = array(
+				'status'=>'pass',
 				'_id'=>$acc->_id,
 				'cargo'=>$acc->cargo,
 				'nome'=>$acc->nome,
