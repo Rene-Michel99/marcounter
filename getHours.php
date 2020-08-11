@@ -25,10 +25,11 @@
 		if($certificados!=null)
 		{
 			$response = array();
-			foreach ($item as $certificados)
+			
+			for($i=0; $i<count($certificados); $i++)
 			{
-				if((int)$item->categoria==(int)$json['categoria'])
-					array_push($response,$item);
+				if($certificados[$i]->categoria==$json['categoria'])
+					array_push($response, $certificados[$i]);
 			}
 
 			echo json_encode($response);
