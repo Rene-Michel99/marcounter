@@ -24,7 +24,14 @@
 
 		if($certificados!=null)
 		{
-			echo json_encode($certificados);
+			$response = [];
+			foreach ($item as $certificados)
+			{
+				if($item->categoria==$json['categoria'])
+					array_push($response,$item);
+			}
+
+			echo json_encode($response);
 		}
 		else
 			echo json_encode(array("status"=>"none"));
