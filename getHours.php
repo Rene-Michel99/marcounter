@@ -24,7 +24,7 @@
 
 		if($certificados!=null)
 		{
-			echo json_encode(array("certificados"=>$certificados));
+			echo json_encode($certificados);
 		}
 		else
 			echo json_encode(array("status"=>"none"));
