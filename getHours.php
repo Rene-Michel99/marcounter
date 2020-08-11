@@ -21,10 +21,10 @@
 
 		foreach ($rows as $row)
 			$certificados = $row->certificados;
-		
+
 		if($certificados!=null)
 		{
-			echo json_encode($certificados);
+			echo json_encode(array("certificados"=>$certificados));
 		}
 		else
 			echo json_encode(array("status"=>"none"));
