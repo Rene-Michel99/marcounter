@@ -24,10 +24,10 @@
 
 		if($certificados!=null)
 		{
-			$response = [];
+			$response = array();
 			foreach ($item as $certificados)
 			{
-				if($item->categoria==$json['categoria'])
+				if((int)$item->categoria==(int)$json['categoria'])
 					array_push($response,$item);
 			}
 
