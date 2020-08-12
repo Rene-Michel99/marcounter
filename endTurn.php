@@ -31,28 +31,38 @@
 
 			$res = $manager->executeBulkWrite("pds.activatedEvents",$bulk);
 
-			//atribuir as horas a todos os usuarios presentes
-			$query = new MongoDB\Driver\Query(['_id'=>$response->_id]);
-			$rows = $manager->executeQuery("pds.eventos",$query);
-
-			$event = null;
-			foreach ($rows as $row)
-				$event = $row;
-
-			for($i=0; $i<count($response->presences); $i++)
+			if($response->fim=="ended")
 			{
-				$query = new MongoDB\Driver\Query(['_id'=>$response->presences[$i]]);
+				//atribuir as horas a todos os usuarios presentes
+				$query = new MongoDB\Driver\Query(['_id'=>$response->_id]);
+				$rows = $manager->executeQuery("pds.eventos",$query);
 
-				$res = $manager->executeQuery("pds.usuario",$query);
-				$perf = null;
-				foreach ($res as $r)
-					$perf = $r;
+				$event = null;
+				foreach ($rows as $row)
+					$event = $row;
 
-				$perf->horas = (int)$perf->horas + (int)$event->horas;
-				$perf->horas = (string)$perf->horas;
-				$bulk = new MongoDB\Driver\BulkWrite;
-				$bulk->update(['_id'=>$perf->_id],$perf);
-				$res = $manager->executeBulkWrite("pds.usuario",$bulk);
+				for($i=0; $i<count($response->presences); $i++)
+				{
+					$query = new MongoDB\Driver\Query(['_id'=>$response->presences[$i]]);
+
+					$res = $manager->executeQuery("pds.usuario",$query);
+					$perf = null;
+					foreach ($res as $r)
+						$perf = $r;
+					$array = array(
+						'id'=>$event->_id,
+						'categoria'=>$event->tipo,
+						'tema'=>$event->tema,
+						'data'=>$event->data,
+						'horas'=>$event->horas
+					);
+					array_push($perf->certificados,$array);
+					$perf->horas = (int)$perf->horas + (int)$event->horas;
+					$perf->horas = (string)$perf->horas;
+					$bulk = new MongoDB\Driver\BulkWrite;
+					$bulk->update(['_id'=>$perf->_id],$perf);
+					$res = $manager->executeBulkWrite("pds.usuario",$bulk);
+				}
 			}
 
 			echo json_encode(array("status"=>"success"));
