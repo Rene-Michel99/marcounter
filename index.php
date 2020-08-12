@@ -31,7 +31,7 @@
     				'fim'=>""
     			);
 
-    			$bulk->insert($event)
+    			$bulk->insert($event);
 
     			$status = $manager->executeBulkWrite("pds.activatedEvents",$bulk);
 
