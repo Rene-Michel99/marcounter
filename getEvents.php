@@ -3,8 +3,6 @@
 	header("Access-Control-Allow-Headers:*");
 	header("Content-type: application/json");
 
-	$json = json_decode($json,true);
-
 	$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 	$query = new MongoDB\Driver\Query([]);
 
