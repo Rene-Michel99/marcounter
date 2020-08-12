@@ -25,10 +25,10 @@
 				$response->fim = "ended";
 
 			$bulk = new MongoDB\Driver\BulkWrite;
-			$bulk->insert(['_id'=>$response->_id],$response);
+			$bulk->update(['_id'=>$response->_id],$response);
 
 			$res = $manager->executeBulkWrite("pds.activatedEvents",$bulk);
-			
+
 			echo json_encode(array("status"=>"success"));
 		}
 		else
