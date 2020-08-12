@@ -45,7 +45,7 @@
 			echo json_encode(array("presences"=>$array,"tipo"=>$tipo));
 		}
 		else
-			echo json_encode(array("status"=>"none"));
+			echo json_encode(array("presences"=>array(),"tipo"=>$tipo));
 
 	}
 	else
