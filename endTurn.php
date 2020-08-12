@@ -59,9 +59,15 @@
 					array_push($perf->certificados,$array);
 					$perf->horas = (int)$perf->horas + (int)$event->horas;
 					$perf->horas = (string)$perf->horas;
+
 					$bulk = new MongoDB\Driver\BulkWrite;
 					$bulk->update(['_id'=>$perf->_id],$perf);
 					$res = $manager->executeBulkWrite("pds.usuario",$bulk);
+
+					$remove = new MongoDB\Driver\BulkWrite;
+					$remove->delete(['_id'=>$event->_id]);
+
+					$res = $manager->executeBulkWrite("pds.eventos",$remove);
 				}
 			}
 
