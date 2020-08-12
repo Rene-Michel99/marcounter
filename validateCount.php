@@ -15,7 +15,7 @@
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 		$query = new MongoDB\Driver\Query(['_id'=>$json['qrcode']]);
 
-		$rows = $manager->execute("pds.activatedEvents",$query);
+		$rows = $manager->executeQuery("pds.activatedEvents",$query);
 
 		$response = null;
 		foreach ($rows as $row)
