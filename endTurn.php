@@ -9,6 +9,8 @@
 
 	if($json!=null)
 	{
+		$json = json_decode($json,true);
+		
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 		$query = new MongoDB\Driver\Query(['_id'=>$json['_id']]);
 		$rows = $manager->executeQuery("pds.activatedEvents",$query);
