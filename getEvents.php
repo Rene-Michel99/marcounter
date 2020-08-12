@@ -3,16 +3,12 @@
 	header("Access-Control-Allow-Headers:*");
 	header("Content-type: application/json");
 
-	$json = null;
-	foreach ($_POST as $post)
-		$json = $post;
-
 	if($json!=null)
 	{
 		$json = json_decode($json,true);
 
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
-		$query = new MongoDB\Driver\Query(['tipo'=>$json['tipo']]);
+		$query = new MongoDB\Driver\Query([]);
 
 		$rows = $manager->executeQuery("pds.eventos",$query);
 
