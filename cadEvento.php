@@ -14,8 +14,6 @@
 
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 
-
-
 		$evento = array(
 			'_id'=>uniqid(),
 			'tipo'=>$json['tipo'],
@@ -32,7 +30,7 @@
 		$bulk = new MongoDB\Driver\BulkWrite;
 		$bulk->insert($evento);
 
-		$res = $bulk->executeBulkWrite("pds.eventos",$bulk);
+		$res = $manager->executeBulkWrite("pds.eventos",$bulk);
 		echo json_encode(array("status"=>"success"));
 	}
 	else
