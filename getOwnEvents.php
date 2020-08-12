@@ -23,6 +23,7 @@
 
 		echo json_encode(array("eventos"=>$eventos));
 	}
-	echo json_encode(array("status"=>"null"));
+	else
+		echo json_encode(array("status"=>"null"));
 
 ?>
