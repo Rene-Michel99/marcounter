@@ -33,7 +33,7 @@
 
     			$bulk->insert($event)
 
-    			$res = $manager->executeBulkWrite("pds.activatedEvents",$bulk);
+    			$status = $manager->executeBulkWrite("pds.activatedEvents",$bulk);
 
     			echo "Event: ".$res->tema." initialized";
     		}
