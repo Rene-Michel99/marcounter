@@ -10,7 +10,7 @@
 	if($json!=null)
 	{
 		$json = json_decode($json,true);
-		
+
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 		$query = new MongoDB\Driver\Query(['_id'=>$json['_id']]);
 		$rows = $manager->executeQuery("pds.activatedEvents",$query);
@@ -30,6 +30,30 @@
 			$bulk->update(['_id'=>$response->_id],$response);
 
 			$res = $manager->executeBulkWrite("pds.activatedEvents",$bulk);
+
+			//atribuir as horas a todos os usuarios presentes
+			$query = new MongoDB\Driver\Query(['_id'=>$response->_id]);
+			$rows = $manager->executeQuery("pds.eventos",$query);
+
+			$event = null;
+			foreach ($rows as $row)
+				$event = $row;
+
+			for($i=0; $i<count($response->presences); $i++)
+			{
+				$query = new MongoDB\Driver\Query(['_id'=>$response->presences[$i]]);
+
+				$res = $manager->executeQuery("pds.usuario",$query);
+				$perf = null;
+				foreach ($res as $r)
+					$perf = $r;
+
+				$perf->horas = (int)$perf->horas + (int)$event->horas;
+				$perf->horas = (string)$perf->horas;
+				$bulk = new MongoDB\Driver\BulkWrite;
+				$bulk->update(['_id'=>$perf->_id],$perf);
+				$res = $manager->executeBulkWrite("pds.usuario",$bulk);
+			}
 
 			echo json_encode(array("status"=>"success"));
 		}
