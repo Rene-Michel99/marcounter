@@ -23,15 +23,26 @@
 
 		if($response!=null)
 		{
-			$bulk = new MongoDB\Driver\BulkWrite;
+			$check = false;
+			for($i=0; $i<count($response->presences); $i++)
+			{
+				if($response->presences[$i]==$json['_id'])
+					$check = true;
+			}
+			if(!$check)
+			{
+				$bulk = new MongoDB\Driver\BulkWrite;
 
-			array_push($response->presences,$json['_id']);
+				array_push($response->presences,$json['_id']);
 
-			$bulk->update(['_id'=>$json['qrcode']],$response);
+				$bulk->update(['_id'=>$json['qrcode']],$response);
 
-			$res = $manager->executeBulkWrite("pds.activatedEvents",$bulk);
+				$res = $manager->executeBulkWrite("pds.activatedEvents",$bulk);
 
-			echo json_encode(array("status"=>"success"));
+				echo json_encode(array("status"=>"success"));
+			}
+			else
+				echo json_encode(array("status"=>"catch_try_flod"));
 		}
 		else
 			echo json_encode(array("status"=>"none"));
