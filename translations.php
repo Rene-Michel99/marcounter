@@ -21,14 +21,13 @@
 		foreach ($rows as $row)
 			$response = $row;
 		
-		$up = [
-		"status"=>$json["status"],
-		"activity_now"=>json["now"],
-		"list_success"=>json["list_suc"],
-		"fails_list"=>json["list_fails"],
-		"fails_translations"=>json["fail_tr"],
-		"success_translations"=>json["suc_tr"]
-		];
+		
+		$response["status"] = $json["status"];
+		$response["activity_now"] = json["now"];
+		$response["list_success"] = json["list_suc"];
+		$response["fails_list"] = json["list_fails"];
+		$response["fails_translations"] = json["fail_tr"];
+		$response["success_translations"] = json["suc_tr"];
     
 		$bulk = new MongoDB\Driver\BulkWrite;
 		$bulk->update(['_id'=>$response->_id],$response);
