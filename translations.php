@@ -11,7 +11,7 @@
 	{
 		$json = json_decode($json,true);
 		
-		echo $json;
+		echo $json["status"];
 
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 		
