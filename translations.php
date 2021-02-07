@@ -18,6 +18,7 @@
 		$response = null;
 		foreach ($rows as $row){
 			$response = $row;
+			echo $row;
 		}
 		
 		echo $response;
