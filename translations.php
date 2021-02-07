@@ -10,8 +10,6 @@
 	if($json!=null)
 	{
 		$json = json_decode($json,true);
-		
-		echo $json["status"];
 
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 		$query = new MongoDB\Driver\Query(['_id'=>'001']);
@@ -21,6 +19,7 @@
 		foreach ($rows as $row)
 			$response = $row;
 		
+		echo $response;
 		
 		$response["status"] = $json["status"];
 		$response["activity_now"] = json["now"];
