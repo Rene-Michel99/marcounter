@@ -10,24 +10,26 @@
 	if($json!=null)
 	{
 		$json = json_decode($json,true);
+		
+		echo $json;
 
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
 		
-    $response = [
-      "_id"=>"001",
-      "status"=>$json["status"],
-      "activity_now"=>json["now"],
-      "list_success"=>json["list_suc"],
-      "fails_list"=>json["list_fails"],
-      "fails_translations"=>json["fail_tr"],
-      "success_translations"=>json["suc_tr"]
-    ];
+		$response = [
+		"_id"=>"001",
+		"status"=>$json["status"],
+		"activity_now"=>json["now"],
+		"list_success"=>json["list_suc"],
+		"fails_list"=>json["list_fails"],
+		"fails_translations"=>json["fail_tr"],
+		"success_translations"=>json["suc_tr"]
+		];
     
 		$bulk = new MongoDB\Driver\BulkWrite;
 		$bulk->update(['_id'=>$response->_id],$response);
 
 		$res = $manager->executeBulkWrite("bot_translator.status",$bulk);
-    echo "success";
+    		echo "success";
 	}
 	else
 		echo "error";
