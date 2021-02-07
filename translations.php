@@ -11,14 +11,13 @@
 	{
 		$json = json_decode($json,true);
 
-		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
+		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB2']);
 		$query = new MongoDB\Driver\Query([]);
 		$rows = $manager->executeQuery("bot_translator.status",$query);
 
 		$response = null;
 		foreach ($rows as $row){
 			$response = $row;
-			echo $row;
 		}
 		
 		echo $response;
