@@ -14,9 +14,14 @@
 		echo $json["status"];
 
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
+		$query = new MongoDB\Driver\Query(['_id'=>'001']);
+		$rows = $manager->executeQuery("bot_translator.status",$query);
+
+		$response = null;
+		foreach ($rows as $row)
+			$response = $row;
 		
-		$response = [
-		"_id"=>"001",
+		$up = [
 		"status"=>$json["status"],
 		"activity_now"=>json["now"],
 		"list_success"=>json["list_suc"],
