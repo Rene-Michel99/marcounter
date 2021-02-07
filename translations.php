@@ -12,7 +12,7 @@
 		$json = json_decode($json,true);
 
 		$manager = new MongoDB\Driver\Manager($_ENV['URL_MONGODB']);
-		$query = new MongoDB\Driver\Query(['_id'=>'001']);
+		$query = new MongoDB\Driver\Query([]);
 		$rows = $manager->executeQuery("bot_translator.status",$query);
 
 		$response = null;
