@@ -16,8 +16,10 @@
 		$rows = $manager->executeQuery("bot_translator.status",$query);
 
 		$response = null;
-		foreach ($rows as $row)
+		foreach ($rows as $row){
 			$response = $row;
+			echo $row;
+		}
 		
 		echo $response;
 		
